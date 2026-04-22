@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Handpose Example</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+    <script src="https://unpkg.com/ml5@0.6.0/dist/ml5.min.js"></script>
+  </head>
+  <body>
+    <script>
+      let video;
+let handpose;
+let predictions = [];
+
+let pinch = false;
+let pinchX, pinchY;
+
+function setup() {
+  createCanvas(640, 480);
+
+  video = createCapture(VIDEO);
+  video.size(width, height);
+  video.hide();
+
+  handpose = ml5.handpose(video, () => {
+    console.log("Model ready!");
+  });
+
+  handpose.on("predict", results => {
+    predictions = results;
+  });
+
+  background(0);
+}
+
+function draw() {
+  // Draw webcam lightly (trail effect)
+  tint(255, 50);
+  image(video, 0, 0, width, height);
+
+  detectPinch();
+}
+
+// Detect pinch gesture
+function detectPinch() {
+  if (predictions.length > 0) {
+    let hand = predictions[0];
+    let landmarks = hand.landmarks;
+
+    // Thumb tip (4) and index tip (8)
+    let thumb = landmarks[4];
+    let index = landmarks[8];
+
+    let d = dist(thumb[0], thumb[1], index[0], index[1]);
+
+    // If distance small → pinch
+    if (d < 40) {
+      pinch = true;
+      pinchX = (thumb[0] + index[0]) / 2;
+      pinchY = (thumb[1] + index[1]) / 2;
+
+      drawWithPinch(pinchX, pinchY);
+    } else {
+      pinch = false;
+    }
+
+    // Visual feedback
+    fill(pinch ? "red" : "green");
+    noStroke();
+    circle(index[0], index[1], 12);
+    circle(thumb[0], thumb[1], 12);
+  }
+}
+
+// Draw when pinching
+function drawWithPinch(x, y) {
+  stroke(255, 255, 0);
+  strokeWeight(8);
+  line(pmouseX, pmouseY, x, y);
+}
+    </script>
+  </body>
+</html>
