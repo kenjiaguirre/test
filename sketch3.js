@@ -138,56 +138,47 @@ function draw() {
     osc.freq(freq);
 
       if (px > rects[0].x && px < rects[0].x + w && py > rects[0].y && py < rects[0].y + h) {
-    fill("red"); // Red if hovering
-    cursor(HAND);     // Change cursor to hand
+    fill("#FF6599"); // Red if hovering
     rect(rects[0].x,rects[0].y,w,h,10)
     freq = frequencies[0];
     playing = true;
   } else if (px > rects[1].x && px < rects[1].x + w && py > rects[1].y && py < rects[1].y + h) {
-    fill("orange"); // Red if hovering
-    cursor(HAND);     // Change cursor to hand
+    fill("#ff0000"); // Red if hovering
     rect(rects[1].x,rects[1].y,w,h,10)
     freq = frequencies[1];
     playing = true;
   } else if (px > rects[2].x && px < rects[2].x + w && py > rects[2].y && py < rects[2].y + h) {
-    fill("yellow"); // Red if hovering
-    cursor(HAND);     // Change cursor to hand
+    fill("#FF8E00"); // Red if hovering
     rect(rects[2].x,rects[2].y,w,h,10)
     freq = frequencies[2];
     playing = true;
   } else if (px > rects[3].x && px < rects[3].x + w && py > rects[3].y && py < rects[3].y + h) {
-    fill("orange"); // Red if hovering
-    cursor(HAND);     // Change cursor to hand
+    fill("#FFFF00"); // Red if hovering
     rect(rects[3].x,rects[3].y,w,h,10)
     freq = frequencies[3];
     playing = true;
   } else if (px > rects[4].x && px < rects[4].x + w && py > rects[4].y && py < rects[4].y + h) {
-    fill("orange"); // Red if hovering
-    cursor(HAND);     // Change cursor to hand
+    fill("#008E00"); // Red if hovering
     rect(rects[4].x,rects[4].y,w,h,10)
     freq = frequencies[4];
     playing = true;
   } else if (px > rects[5].x && px < rects[5].x + w && py > rects[5].y && py < rects[5].y + h) {
-    fill("orange"); // Red if hovering
-    cursor(HAND);     // Change cursor to hand
+    fill("#00C0C0"); // Red if hovering
     rect(rects[5].x,rects[5].y,w,h,10)
     freq = frequencies[5];
     playing = true;
   } else if (px > rects[6].x && px < rects[6].x + w && py > rects[6].y && py < rects[6].y + h) {
-    fill("orange"); // Red if hovering
-    cursor(HAND);     // Change cursor to hand
+    fill("#400098"); // Red if hovering
     rect(rects[6].x,rects[6].y,w,h,10)
     freq = frequencies[6];
     playing = true;
   } else if (px > rects[7].x && px < rects[7].x + w && py > rects[7].y && py < rects[7].y + h) {
-    fill("orange"); // Red if hovering
-    cursor(HAND);     // Change cursor to hand
+    fill("#8E008E"); // Red if hovering
     rect(rects[7].x,rects[7].y,w,h,10)
     freq = frequencies[7];
     playing = true;
   } else {
     fill(255);       // White if not hovering
-    cursor(ARROW);    // Default arrow cursor
     playing = false;
   }
 
