@@ -30,12 +30,12 @@ let y=200;
 
 function draw() {
   background(250);
-  if (predictedWord !== "") {
+  /*if (predictedWord !== "") {
     fill(211, 107, 255);
     textAlign(CENTER, CENTER);
     textSize(64);
     text(predictedWord, width / 2, 90);
-  }   
+  }*/   
 
   fill("blue");
   square(xRandom,yRandom,80);
@@ -51,7 +51,7 @@ function draw() {
         y = y - 1;
     }
   }else if(predictedWord === "down"){
-    if(y>=450){
+    if(y>=400){
         y=y;
     }else{
         y = y + 1;
