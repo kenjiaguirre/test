@@ -75,8 +75,11 @@ let green = true;
 let blue = true;
 let lightOff = true;
 
+let cWidth = 640;
+let rectWidth = 640/3;
+
 function setup() {
-  createCanvas(640, 480);
+  createCanvas(cWidth, 480);
   video = createCapture(VIDEO);
   video.size(width, height);
 
@@ -105,17 +108,16 @@ function modelReady() {
 }
 
 function draw() {
-  background("#badaff");
-  noStroke();
+  background("#6d3896");
+  fill("white");
+  stroke("black");
+  strokeWeight(1);
   // red square
-  fill(255, 0, 0);
-  rect(200, 200, 50, 50);
+  rect(0, 200, rectWidth, rectWidth);
   // green square
-  fill(0, 255, 0);
-  rect(295, 200, 50, 50);
+  rect(rectWidth, 200, rectWidth, rectWidth);
   // blue square
-  fill(0, 0, 255);
-  rect(390, 200, 50, 50);
+  rect(rectWidth*2, 200, rectWidth, rectWidth);
   // black square
   fill(0);
   rect(10, 10, 50, 50);
@@ -163,30 +165,28 @@ function checkDistance(error) {
   px = tipX8;
   py = tipY8;
 
-  // show x and y position index fingertip
-  fill(0);
-  textSize(24);
-  text("Indexfinger x position " + nfc(px, 0), 100, 50);
-  text("Indexfinger y position " + nfc(py, 0), 100, 80);
-
   if (error) {
     console.error(error);
   }
 
-  const redSquare = px > 200 && px < 250 && py > 200 && py < 250;
-  const greenSquare = px > 295 && px < 345 && py > 200 && py < 250;
-  const blueSquare = px > 390 && px < 440 && py > 200 && py < 250;
+  const redSquare = px > 0 && px < rectWidth && py > 200 && py < 200+rectWidth;
+  const greenSquare = px > rectWidth && px < rectWidth*2 && py > 200 && py < 200+rectWidth;
+  const blueSquare = px > rectWidth*2 && px < rectWidth*3 && py > 200 && py < 200+rectWidth;
   const blackSquare = px > 20 && px < 70 && py > 20 && py < 70;
 
   if (redSquare && red) {
     gotLabel("0");
     console.log("Red");
+    fill(255, 0, 0);
+    rect(0, 200, rectWidth, rectWidth);
     red = false;
     green = true;
     blue = true;
     lightOff = true;
   } else if (greenSquare && green) {
     gotLabel("1");
+    fill(0, 255, 0);
+    rect(rectWidth, 200, rectWidth, rectWidth);
     console.log("Green");
     red = true;
     green = false;
@@ -194,6 +194,8 @@ function checkDistance(error) {
     lightOff = true;
   } else if (blueSquare && blue) {
     gotLabel("2");
+  fill(0, 0, 255);
+  rect(rectWidth*2, 200, rectWidth, rectWidth);
     console.log("Blue");
     red = true;
     green = true;
