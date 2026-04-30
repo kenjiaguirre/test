@@ -18,9 +18,6 @@ function setup() {
   // Start detecting faces from the webcam video
   faceMesh.detectStart(video, gotFaces);
   osc = new p5.Oscillator('sine');
-}
-
-function mousePressed(){
   osc.start();
 }
 
